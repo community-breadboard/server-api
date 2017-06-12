@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
 
   get '/food_items', to: 'food_items#index'
+  get '/me', to: 'users#show'
 
 end

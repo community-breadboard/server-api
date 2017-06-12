@@ -29,7 +29,15 @@ ActiveRecord::Schema.define(version: 20170525184958) do
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
-  create_table "consumer_groups", force: :cascade do |t|
+  create_table "families", force: :cascade do |t|
+    t.integer "family_group_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["family_group_id"], name: "index_families_on_family_group_id"
+  end
+
+  create_table "family_groups", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -50,6 +58,10 @@ ActiveRecord::Schema.define(version: 20170525184958) do
     t.text "description"
     t.string "ingredients"
     t.string "image"
+    t.integer "availability_start_month"
+    t.integer "availability_start_day"
+    t.integer "availability_end_month"
+    t.integer "availability_end_day"
     t.integer "food_category_id"
     t.integer "producer_entity_id"
     t.datetime "created_at", null: false
@@ -101,10 +113,9 @@ ActiveRecord::Schema.define(version: 20170525184958) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "consumer_group_id"
+    t.integer "family_id"
     t.integer "producer_entity_id"
     t.string "type"
-    t.string "name"
     t.string "first_name"
     t.string "last_name"
     t.float "balance"
@@ -112,7 +123,7 @@ ActiveRecord::Schema.define(version: 20170525184958) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["consumer_group_id"], name: "index_users_on_consumer_group_id"
+    t.index ["family_id"], name: "index_users_on_family_id"
     t.index ["producer_entity_id"], name: "index_users_on_producer_entity_id"
   end
 

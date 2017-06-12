@@ -8,6 +8,10 @@ class CreateFoodItems < ActiveRecord::Migration[5.1]
       t.text :description
       t.string :ingredients
       t.string :image
+	  t.integer :availability_start_month
+	  t.integer :availability_start_day
+	  t.integer :availability_end_month
+	  t.integer :availability_end_day
       t.references :food_category, foreign_key: true
 	  t.references :producer_entity, foreign_key: true
       t.timestamps
