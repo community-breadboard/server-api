@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+bread:
+  label: Bread
+  image_svg_name: bread
+
+dairy_eggs:
+  label: Dairy Eggs
+  image_svg_name: dairy
+
+dry_goods:
+  label: Dry Goods
+  image_svg_name: dry_goods
+
+ferments:
+  label: Ferments
+  image_svg_name: ferments
+
+flowers:
+  label: Flowers
+  image_svg_name: flowers
+
+meat:
+  label: Meat
+  image_svg_name: meat
+
+roots_storage:
+  label: Roots / Storage
+  image_svg_name: roots
+
+honey_jam_syrup:
+  label: Honey / Jam / Syrup
+  image_svg_name: honey

@@ -1,0 +1,9 @@
+beers:
+  street: 64 Mt. Vernon St.
+  street2:
+  city: Portsmouth
+  state: NH
+  zip_code: 03801
+  latitude: 43.0704758
+  longitude: -70.7535304
+  addressable: cyrus (User)

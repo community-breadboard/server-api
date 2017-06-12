@@ -1,0 +1,34 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+mountain:
+  name: Maine Mountain Bread
+  unit_label_singular: boule
+  unit_label_plural: boules
+  unit_cost: 6.75
+  description: Hearty, nutritious and delicious. A mix of pumpkin, sunflower and sesame seeds encase a loaf baked with Maine grown heritage wheat. A beautiful bread.
+  ingredients: Organic white wheat flour, water, organic sifted whole wheat flour, organic pumpkin, sunflower and sesame seeds, sea salt.
+  image: mountain.jpg
+  food_category: bread
+  producer_entity: juniper
+
+levain:
+  name: Country Levain
+  unit_label_singular: loaf
+  unit_label_plural: loaves
+  unit_cost: 6
+  description: A rustic levain blending three excellent flours.
+  ingredients: Organic white wheat flour, water, organic whole rye flour, sifted whole wheat flour, sea salt.
+  image: country_levain.jpg
+  food_category: bread
+  producer_entity: juniper
+
+spelt:
+  name: Spelt Boule
+  unit_label_singular: boule
+  unit_label_plural: boules
+  unit_cost: 6
+  description: Spelt flour gives this bread its great texture and slightly nutty flavor. Low gluten.
+  ingredients: Organic white spelt flour, water, organic whole spelt flour, sea salt.
+  image: spelt_boule.jpg
+  food_category: bread
+  producer_entity: juniper
