@@ -31,16 +31,20 @@ ActiveRecord::Schema.define(version: 20170525184958) do
 
   create_table "families", force: :cascade do |t|
     t.integer "family_group_id"
+    t.integer "producer_entity_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["family_group_id"], name: "index_families_on_family_group_id"
+    t.index ["producer_entity_id"], name: "index_families_on_producer_entity_id"
   end
 
   create_table "family_groups", force: :cascade do |t|
+    t.integer "producer_entity_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["producer_entity_id"], name: "index_family_groups_on_producer_entity_id"
   end
 
   create_table "food_categories", force: :cascade do |t|
@@ -64,8 +68,10 @@ ActiveRecord::Schema.define(version: 20170525184958) do
     t.integer "availability_end_day"
     t.integer "food_category_id"
     t.integer "producer_entity_id"
+    t.integer "aggregator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["aggregator_id"], name: "index_food_items_on_aggregator_id"
     t.index ["food_category_id"], name: "index_food_items_on_food_category_id"
     t.index ["producer_entity_id"], name: "index_food_items_on_producer_entity_id"
   end
@@ -93,9 +99,9 @@ ActiveRecord::Schema.define(version: 20170525184958) do
   end
 
   create_table "producer_entities", force: :cascade do |t|
+    t.string "type"
     t.string "name"
     t.text "description"
-    t.boolean "is_aggregator", default: false
     t.string "sale_start_day_of_week"
     t.integer "sale_start_hour"
     t.integer "sale_start_minute"
@@ -112,13 +118,23 @@ ActiveRecord::Schema.define(version: 20170525184958) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "service_days", force: :cascade do |t|
+    t.integer "producer_entity_id"
+    t.date "service_date"
+    t.text "description"
+    t.string "signup_genius_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["producer_entity_id"], name: "index_service_days_on_producer_entity_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.integer "family_id"
     t.integer "producer_entity_id"
     t.string "type"
     t.string "first_name"
     t.string "last_name"
-    t.float "balance"
+    t.float "balance", default: 0.0
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false

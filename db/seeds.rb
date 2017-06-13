@@ -12,29 +12,29 @@ dairy = FoodCategory.create({ label: 'Dairy / Eggs', image_svg_name: 'dairy'})
 
 juniper = ProducerEntity.create({name: 'Juniper Cottage Bake Shop'})
 benedikt = ProducerEntity.create({name: 'Benedikt Dairy'})
-tuckaway = ProducerEntity.create({name: 'Tuckaway Farm'})
+tuckaway = Aggregator.create({name: 'Tuckaway Farm'})
 
-mountain = FoodItem.create({name: 'Maine Mountain Bread', unit_label_singular: 'boule', unit_label_plural: 'boules', unit_cost: 6.75, description: 'Hearty, nutritious and delicious. A mix of pumpkin, sunflower and sesame seeds encase a loaf baked with Maine grown heritage wheat. A beautiful bread.', ingredients: 'Organic white wheat flour, water, organic sifted whole wheat flour, organic pumpkin, sunflower and sesame seeds, sea salt.', image: 'mountain.jpg', food_category: bread, producer_entity: juniper});
+mountain = FoodItem.create({name: 'Maine Mountain Bread', unit_label_singular: 'boule', unit_label_plural: 'boules', unit_cost: 6.75, description: 'Hearty, nutritious and delicious. A mix of pumpkin, sunflower and sesame seeds encase a loaf baked with Maine grown heritage wheat. A beautiful bread.', ingredients: 'Organic white wheat flour, water, organic sifted whole wheat flour, organic pumpkin, sunflower and sesame seeds, sea salt.', image: 'mountain.jpg', food_category: bread, producer_entity: juniper, aggregator: tuckaway});
 
-levain = FoodItem.create({name: 'Country Levain', unit_label_singular: 'loaf', unit_label_plural: 'loaves', unit_cost: 6, description: 'A rustic levain blending three excellent flours.', ingredients: 'Organic white wheat flour, water, organic whole rye flour, sifted whole wheat flour, sea salt', image: 'country_levain.jpg', food_category: bread, producer_entity: juniper});
+levain = FoodItem.create({name: 'Country Levain', unit_label_singular: 'loaf', unit_label_plural: 'loaves', unit_cost: 6, description: 'A rustic levain blending three excellent flours.', ingredients: 'Organic white wheat flour, water, organic whole rye flour, sifted whole wheat flour, sea salt', image: 'country_levain.jpg', food_category: bread, producer_entity: juniper, aggregator: tuckaway});
 
-spelt = FoodItem.create({name: 'Spelt Boule', unit_label_singular: 'boule', unit_label_plural: 'boules', unit_cost: 6, description: 'Spelt flour gives this bread its great texture and slightly nutty flavor. Low gluten.', ingredients: 'Organic white spelt flour, water, organic whole spelt flour, sea salt', image: 'spelt_boule.jpg', food_category: bread, producer_entity: juniper});
+spelt = FoodItem.create({name: 'Spelt Boule', unit_label_singular: 'boule', unit_label_plural: 'boules', unit_cost: 6, description: 'Spelt flour gives this bread its great texture and slightly nutty flavor. Low gluten.', ingredients: 'Organic white spelt flour, water, organic whole spelt flour, sea salt', image: 'spelt_boule.jpg', food_category: bread, producer_entity: juniper, aggregator: tuckaway});
 
-eggs = FoodItem.create({name: 'Eggs', unit_label_singular: 'dozen', unit_label_plural: 'dozen', description: 'Farm fresh eggs', ingredients: '', image: 'eggs.jpg', food_category: dairy, producer_entity: tuckaway});
+eggs = FoodItem.create({name: 'Eggs', unit_label_singular: 'dozen', unit_label_plural: 'dozen', description: 'Farm fresh eggs', ingredients: '', image: 'eggs.jpg', food_category: dairy, producer_entity: tuckaway, aggregator: tuckaway});
 
-milk = FoodItem.create({name: 'Milk', unit_label_singular: 'quart', unit_label_plural: 'quarts', description: 'Raw Milk', ingredients: '', image: 'milk.jpg', food_category: dairy, producer_entity: benedikt});
+milk = FoodItem.create({name: 'Milk', unit_label_singular: 'quart', unit_label_plural: 'quarts', description: 'Raw Milk', ingredients: '', image: 'milk.jpg', food_category: dairy, producer_entity: benedikt, aggregator: tuckaway});
 
 durham1 = FamilyGroup.create({name:'Durham1'});
-smith = Family.create({name: 'Smith Family', family_group: durham1});
+smith = Family.create({name: 'Smith Family', family_group: durham1, aggregator: tuckaway});
 jane = Consumer.new(first_name: 'Jane', last_name: 'Smith', balance: 0, email: 'janesmith@gmail.com', password: 'tuckawayfarmiscool', password_confirmation: 'tuckawayfarmiscool', family: smith)
 jane.save
 john = Consumer.new(first_name: 'John', last_name: 'Smith', balance: 0, email: 'johnsmith@gmail.com', password: 'tuckawayfarmiscool', password_confirmation: 'tuckawayfarmiscool', family: smith)
 john.save
 
-jones = Family.create({name: 'Jones Family', family_group: durham1});
+jones = Family.create({name: 'Jones Family', family_group: durham1, aggregator: tuckaway});
 sarah = Consumer.new(first_name: 'Sarah', last_name: 'Jones', balance: 0, email: 'sarahjones@gmail.com', password: 'tuckawayfarmiscool', password_confirmation: 'tuckawayfarmiscool', family: jones)
 sarah.save
 
-anderson = Family.create({name: 'Anderson Family'});
+anderson = Family.create({name: 'Anderson Family', aggregator: tuckaway});
 chris = Consumer.new(first_name: 'Chris', last_name: 'Anderson', balance: 0, email: 'chrisanderson@gmail.com', password: 'tuckawayfarmiscool', password_confirmation: 'tuckawayfarmiscool', family: anderson)
 chris.save

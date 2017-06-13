@@ -1,0 +1,2 @@
+class Aggregator < ProducerEntity
+end
