@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525184958) do
+ActiveRecord::Schema.define(version: 20170518000070) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "addressable_type"
@@ -55,10 +55,11 @@ ActiveRecord::Schema.define(version: 20170525184958) do
   end
 
   create_table "food_items", force: :cascade do |t|
+    t.integer "food_category_id"
+    t.integer "producer_entity_id"
     t.string "name"
     t.string "unit_label_singular"
     t.string "unit_label_plural"
-    t.float "unit_cost"
     t.text "description"
     t.string "ingredients"
     t.string "image"
@@ -66,42 +67,23 @@ ActiveRecord::Schema.define(version: 20170525184958) do
     t.integer "availability_start_day"
     t.integer "availability_end_month"
     t.integer "availability_end_day"
-    t.integer "food_category_id"
-    t.integer "producer_entity_id"
-    t.integer "aggregator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["aggregator_id"], name: "index_food_items_on_aggregator_id"
     t.index ["food_category_id"], name: "index_food_items_on_food_category_id"
     t.index ["producer_entity_id"], name: "index_food_items_on_producer_entity_id"
   end
 
   create_table "order_food_items", force: :cascade do |t|
     t.integer "order_id"
-    t.integer "food_item_id"
+    t.integer "sellable_food_item_id"
     t.integer "quantity"
     t.float "unit_cost"
-    t.index ["food_item_id"], name: "index_order_food_items_on_food_item_id"
     t.index ["order_id"], name: "index_order_food_items_on_order_id"
+    t.index ["sellable_food_item_id"], name: "index_order_food_items_on_sellable_food_item_id"
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.integer "user_id"
-    t.float "total_cost"
-    t.string "status"
-    t.date "order_start_date"
-    t.date "order_end_date"
-    t.date "pickup_start_date"
-    t.date "pickup_end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_orders_on_user_id"
-  end
-
-  create_table "producer_entities", force: :cascade do |t|
-    t.string "type"
-    t.string "name"
-    t.text "description"
+  create_table "order_pickup_schedules", force: :cascade do |t|
+    t.integer "producer_entity_id"
     t.string "sale_start_day_of_week"
     t.integer "sale_start_hour"
     t.integer "sale_start_minute"
@@ -116,13 +98,43 @@ ActiveRecord::Schema.define(version: 20170525184958) do
     t.integer "pickup_end_minute"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["producer_entity_id"], name: "index_order_pickup_schedules_on_producer_entity_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "order_pickup_schedule_id"
+    t.float "total_cost"
+    t.string "status"
+    t.date "date_placed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_pickup_schedule_id"], name: "index_orders_on_order_pickup_schedule_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "producer_entities", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sellable_food_items", force: :cascade do |t|
+    t.integer "seller_id"
+    t.integer "food_item_id"
+    t.float "unit_cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_item_id"], name: "index_sellable_food_items_on_food_item_id"
+    t.index ["seller_id"], name: "index_sellable_food_items_on_seller_id"
   end
 
   create_table "service_days", force: :cascade do |t|
     t.integer "producer_entity_id"
     t.date "service_date"
     t.text "description"
-    t.string "signup_genius_link"
+    t.string "signup_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["producer_entity_id"], name: "index_service_days_on_producer_entity_id"

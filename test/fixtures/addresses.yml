@@ -1,9 +1,47 @@
-beers:
-  street: 64 Mt. Vernon St.
+smiths_address:
+  street: 64 Oak St.
   street2:
-  city: Portsmouth
+  city: Durham
   state: NH
   zip_code: 03801
   latitude: 43.0704758
   longitude: -70.7535304
-  addressable: cyrus (User)
+  addressable: smith (Family)
+
+jones_address:
+  street: 100 Elm St.
+  street2:
+  city: Durham
+  state: NH
+  zip_code: 03802
+  latitude: 43.0704758
+  longitude: -70.7535304
+  addressable: jones (Family)
+
+baker_address:
+  street: 12 Marcy St.
+  street2:
+  city: Durham
+  state: NH
+  zip_code: 03801
+  latitude: 43.0704758
+  longitude: -70.7535304
+  addressable: baker (Family)
+
+
+
+durham1 = FamilyGroup.create({name:'Durham1'});
+smith = Family.create({name: 'Smith Family', family_group: durham1, aggregator: tuckaway});
+jane = Consumer.new(first_name: 'Jane', last_name: 'Smith', balance: 0, email: 'janesmith@gmail.com', password: 'eatlocal', password_confirmation: 'eatlocal', family: smith)
+jane.save
+john = Consumer.new(first_name: 'John', last_name: 'Smith', balance: 0, email: 'johnsmith@gmail.com', password: 'eatlocal', password_confirmation: 'eatlocal', family: smith)
+john.save
+
+jones = Family.create({name: 'Jones Family', family_group: durham1, aggregator: tuckaway});
+sarah = Consumer.new(first_name: 'Sarah', last_name: 'Jones', balance: 0, email: 'sarahjones@gmail.com', password: 'eatlocal', password_confirmation: 'eatlocal', family: jones)
+sarah.save
+
+
+baker = Family.create({name: 'Baker Family', aggregator: juniper});
+ed = Consumer.new(first_name: 'Ed', last_name: 'Baker', balance: 0, email: 'edbaker@gmail.com', password: 'eatlocal', password_confirmation: 'eatlocal', family: baker)
+chris.save

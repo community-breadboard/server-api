@@ -4,7 +4,7 @@ class CreateServiceDays < ActiveRecord::Migration[5.1]
 			t.belongs_to :producer_entity
 			t.date :service_date
 			t.text :description
-			t.string :signup_genius_link
+			t.string :signup_url
 			t.timestamps
 		end
 	end
