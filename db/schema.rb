@@ -84,16 +84,16 @@ ActiveRecord::Schema.define(version: 20170518000070) do
 
   create_table "order_pickup_schedules", force: :cascade do |t|
     t.integer "producer_entity_id"
-    t.string "sale_start_day_of_week"
+    t.integer "sale_start_day_of_week"
     t.integer "sale_start_hour"
     t.integer "sale_start_minute"
-    t.string "sale_end_day_of_week"
+    t.integer "sale_end_day_of_week"
     t.integer "sale_end_hour"
     t.integer "sale_end_minute"
-    t.string "pickup_start_day_of_week"
+    t.integer "pickup_start_day_of_week"
     t.integer "pickup_start_hour"
     t.integer "pickup_start_minute"
-    t.string "pickup_end_day_of_week"
+    t.integer "pickup_end_day_of_week"
     t.integer "pickup_end_hour"
     t.integer "pickup_end_minute"
     t.datetime "created_at", null: false
