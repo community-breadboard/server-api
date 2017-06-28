@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
-  get '/food_items_to_buy', to: 'food_items#index'
+  get '/food_items_for_sale', to: 'food_items#index'
   get '/service_days', to: 'service_days#index'
   get '/me', to: 'users#show'
 
