@@ -12,9 +12,10 @@ bread = FoodCategory.create({ label: 'Bread', image_svg_name: 'bread'})
 dairy = FoodCategory.create({ label: 'Dairy / Eggs', image_svg_name: 'dairy'})
 #sweets = FoodCategory.create({ label: 'Honey / Jam / Syrup', image_svg_name: 'sweets.jpeg'})
 
-juniper = ProducerEntity.create({name: 'Juniper Cottage Bake Shop'})
+juniper = ProducerEntity.create({name: 'Juniper Cottage Bake Shop', offerings: 'remote'})
 benedikt = ProducerEntity.create({name: 'Benedikt Dairy'})
-tuckaway = ProducerEntity.create({name: 'Tuckaway Farm'})
+tuckaway = ProducerEntity.create({name: 'Tuckaway Farm', offerings: 'local,remote_group'})
+
 
 juniper_waldorf = OrderPickupSchedule.create({producer_entity: juniper, address: waldorf, sale_start_day_of_week: 5, sale_start_hour: 17, sale_start_minute: 0, sale_end_day_of_week: 3, sale_end_hour: 12, sale_end_minute: 0, pickup_start_day_of_week: 5, pickup_start_hour: 14, pickup_start_minute: 0, pickup_end_day_of_week: 5, pickup_end_hour: 16, pickup_end_minute:0});
 

@@ -115,6 +115,8 @@ ActiveRecord::Schema.define(version: 20170518000070) do
 
   create_table "producer_entities", force: :cascade do |t|
     t.string "name"
+    t.string "web_site_url"
+    t.string "offerings"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
