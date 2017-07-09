@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20170518000070) do
   create_table "addresses", force: :cascade do |t|
     t.string "addressable_type"
     t.integer "addressable_id"
+    t.string "name"
     t.string "street"
     t.string "street2"
     t.string "city"
@@ -31,11 +32,13 @@ ActiveRecord::Schema.define(version: 20170518000070) do
 
   create_table "families", force: :cascade do |t|
     t.integer "family_group_id"
+    t.integer "order_pickup_schedule_id"
     t.integer "producer_entity_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["family_group_id"], name: "index_families_on_family_group_id"
+    t.index ["order_pickup_schedule_id"], name: "index_families_on_order_pickup_schedule_id"
     t.index ["producer_entity_id"], name: "index_families_on_producer_entity_id"
   end
 
@@ -90,10 +93,9 @@ ActiveRecord::Schema.define(version: 20170518000070) do
     t.integer "sale_end_day_of_week"
     t.integer "sale_end_hour"
     t.integer "sale_end_minute"
-    t.integer "pickup_start_day_of_week"
+    t.integer "pickup_day_of_week"
     t.integer "pickup_start_hour"
     t.integer "pickup_start_minute"
-    t.integer "pickup_end_day_of_week"
     t.integer "pickup_end_hour"
     t.integer "pickup_end_minute"
     t.datetime "created_at", null: false

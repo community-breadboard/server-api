@@ -1,6 +1,6 @@
 json.array! @order_pickup_schedules do |s|
 
-	json.(s, :sale_start_day_of_week, :sale_start_hour, :sale_start_minute, :sale_end_day_of_week, :sale_end_hour, :sale_end_minute, :pickup_start_day_of_week, :pickup_start_hour, :pickup_start_minute, :pickup_end_day_of_week, :pickup_end_hour, :pickup_end_minute)
+	json.(s, :sale_start_day_of_week, :sale_start_hour, :sale_start_minute, :sale_end_day_of_week, :sale_end_hour, :sale_end_minute, :pickup_day_of_week, :pickup_start_hour, :pickup_start_minute, :pickup_end_day_of_week, :pickup_end_hour, :pickup_end_minute)
 	json.address do
 		json.street s.address.street
 		json.street2 s.address.street2

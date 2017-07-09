@@ -8,10 +8,9 @@ class CreateOrderPickupSchedules < ActiveRecord::Migration[5.1]
 			t.integer :sale_end_day_of_week
 			t.integer :sale_end_hour
 			t.integer :sale_end_minute
-			t.integer :pickup_start_day_of_week
+			t.integer :pickup_day_of_week
 			t.integer :pickup_start_hour
 			t.integer :pickup_start_minute
-			t.integer :pickup_end_day_of_week
 			t.integer :pickup_end_hour
 			t.integer :pickup_end_minute
 
