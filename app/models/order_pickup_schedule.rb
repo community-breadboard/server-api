@@ -6,7 +6,7 @@ class OrderPickupSchedule < ApplicationRecord
 		d = Date.current
 		next_pickup_date = d;
 		if (d.wday < pickup_day_of_week) then
-			next_pickup_date = d + (d.wday - pickup_day_of_week)
+			next_pickup_date = d + (pickup_day_of_week - d.wday)
 		elsif (d.wday > pickup_day_of_week) then
 			next_pickup_date = d + (7 + pickup_day_of_week - d.wday)
 		else
