@@ -76,15 +76,6 @@ ActiveRecord::Schema.define(version: 20170518000070) do
     t.index ["producer_entity_id"], name: "index_food_items_on_producer_entity_id"
   end
 
-  create_table "order_food_items", force: :cascade do |t|
-    t.integer "order_id"
-    t.integer "sellable_food_item_id"
-    t.integer "quantity"
-    t.float "unit_cost"
-    t.index ["order_id"], name: "index_order_food_items_on_order_id"
-    t.index ["sellable_food_item_id"], name: "index_order_food_items_on_sellable_food_item_id"
-  end
-
   create_table "order_pickup_schedules", force: :cascade do |t|
     t.integer "producer_entity_id"
     t.integer "sale_start_day_of_week"
@@ -101,6 +92,15 @@ ActiveRecord::Schema.define(version: 20170518000070) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["producer_entity_id"], name: "index_order_pickup_schedules_on_producer_entity_id"
+  end
+
+  create_table "order_sellable_food_items", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "sellable_food_item_id"
+    t.integer "quantity"
+    t.float "unit_cost"
+    t.index ["order_id"], name: "index_order_sellable_food_items_on_order_id"
+    t.index ["sellable_food_item_id"], name: "index_order_sellable_food_items_on_sellable_food_item_id"
   end
 
   create_table "orders", force: :cascade do |t|

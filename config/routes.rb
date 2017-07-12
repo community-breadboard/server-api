@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   get '/current_user/service_days', to: 'service_days#index'
   get '/current_user', to: 'users#show'
   get '/current_user/order_pickup_schedules', to: 'order_pickup_schedules#index'
-
+  post '/current_user/submit_order', to: 'users#submit_order'
 end

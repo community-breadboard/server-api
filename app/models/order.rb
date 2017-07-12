@@ -1,5 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :user
-  has_many :order_food_items
-  has_many :food_items_for_sale, :through => :order_food_items
+  belongs_to :order_pickup_schedule
+  has_many :order_sellable_food_items
+  has_many :sellable_food_items, :through => :order_sellable_food_items
+  has_many :food_items, :through => :sellable_food_items
 end

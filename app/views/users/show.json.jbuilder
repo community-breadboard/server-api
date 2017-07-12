@@ -1,4 +1,4 @@
-json.(@user, :email, :first_name, :last_name, :type, :balance)
+json.(@user, :id, :email, :first_name, :last_name, :type, :balance)
 
 json.family do
 	json.name @user.family.name
@@ -11,6 +11,7 @@ json.family do
 	end
 
 	json.order_pickup_schedule do
+		json.id @user.family.order_pickup_schedule.id
 		json.sale_start_day_of_week @user.family.order_pickup_schedule.sale_start_day_of_week
 		json.sale_start_hour @user.family.order_pickup_schedule.sale_start_hour
 		json.sale_start_minute @user.family.order_pickup_schedule.sale_start_minute

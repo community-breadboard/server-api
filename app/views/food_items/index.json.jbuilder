@@ -5,6 +5,7 @@ json.array! @food_categories do |cat|
 	json.food_items cat.food_items do |item|
 		if item.sellable_food_items.length > 0
 			json.id item.id
+			json.sellable_food_item_id (item.sellable_food_items).first.id
 			json.name item.name
 			json.image item.image
 			json.unit_label_singular item.unit_label_singular
