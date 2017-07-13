@@ -5,6 +5,11 @@ class UsersController < ApplicationController
 		@user = current_user
 	end
 
+	# TODO add security around this
+	def add_credit
+		current_user.update(balance: current_user.balance + params[:amount])
+	end
+
 	def submit_order
 		if (current_user.id != params[:consumer][:id]) then
 			raise Exception.new('Consumer ID does not match!')
@@ -19,6 +24,8 @@ class UsersController < ApplicationController
 
 			order_sellable_food_item = OrderSellableFoodItem.create(order: order, sellable_food_item: sellable_food_item, quantity: sellable_food_item_json[:quantityOrdered], unit_cost: sellable_food_item_json[:unitCost])
 		end
+
+		current_user.update(balance: current_user.balance - order.total_cost)
 
 		render json: {status: 'success'}
 

@@ -4,4 +4,5 @@ class Family < ApplicationRecord
 	belongs_to :producer_entity
 	belongs_to :family_group, optional: true
 	belongs_to :order_pickup_schedule
+
 end
