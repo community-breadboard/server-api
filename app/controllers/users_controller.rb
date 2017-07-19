@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
 		order_pickup_schedule = OrderPickupSchedule.find(params[:consumer][:family][:orderPickupSchedule][:id])
 
-		order = Order.create(user: current_user, order_pickup_schedule: order_pickup_schedule, total_cost: params[:outstandingOrder][:totalCost], status: 'open', date_placed: Date.current())
+		order = Order.create(user: current_user, order_pickup_schedule: order_pickup_schedule, total_cost: params[:outstandingOrder][:totalCost], datetime_placed: Date.current(), next_sale_start_datetime: params[:consumer][:family][:orderPickupSchedule][:nextSaleStartDate], next_pickup_date: params[:consumer][:family][:orderPickupSchedule][:nextPickupDate], formatted_pickup_time: params[:consumer][:family][:orderPickupSchedule][:formattedPickupTime], pickup_location_name: params[:consumer][:family][:orderPickupSchedule][:address][:name])
 
 		for sellable_food_item_json in params[:outstandingOrder][:foodItems] do
 			sellable_food_item = SellableFoodItem.find(sellable_food_item_json[:sellableFoodItemId])

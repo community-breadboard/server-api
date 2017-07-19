@@ -107,8 +107,11 @@ ActiveRecord::Schema.define(version: 20170518000070) do
     t.integer "user_id"
     t.integer "order_pickup_schedule_id"
     t.float "total_cost"
-    t.string "status"
-    t.date "date_placed"
+    t.datetime "datetime_placed"
+    t.datetime "next_sale_start_datetime"
+    t.datetime "next_pickup_date"
+    t.string "formatted_pickup_time"
+    t.string "pickup_location_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_pickup_schedule_id"], name: "index_orders_on_order_pickup_schedule_id"
