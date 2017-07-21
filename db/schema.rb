@@ -129,12 +129,14 @@ ActiveRecord::Schema.define(version: 20170518000070) do
 
   create_table "sellable_food_items", force: :cascade do |t|
     t.integer "seller_id"
+    t.integer "wholeseller_id"
     t.integer "food_item_id"
     t.float "unit_cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["food_item_id"], name: "index_sellable_food_items_on_food_item_id"
     t.index ["seller_id"], name: "index_sellable_food_items_on_seller_id"
+    t.index ["wholeseller_id"], name: "index_sellable_food_items_on_wholeseller_id"
   end
 
   create_table "service_days", force: :cascade do |t|

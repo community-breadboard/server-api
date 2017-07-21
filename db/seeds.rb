@@ -30,9 +30,10 @@ eggs = FoodItem.create({name: 'Eggs', unit_label_singular: 'dozen', unit_label_p
 
 milk = FoodItem.create({name: 'Milk', unit_label_singular: 'quart', unit_label_plural: 'quarts', description: 'Raw Milk', ingredients: '', image: 'milk.jpg', food_category: dairy, producer_entity: benedikt});
 
-juniper_spelt = SellableFoodItem.create({food_item: spelt, seller: juniper, unit_cost:6});
-juniper_levain = SellableFoodItem.create({food_item: levain, seller: juniper, unit_cost:6});
-juniper_milk = SellableFoodItem.create({food_item: milk, seller: juniper , unit_cost:5});
+juniper_spelt = SellableFoodItem.create({food_item: spelt, seller: juniper, wholeseller: juniper, unit_cost:6});
+juniper_levain = SellableFoodItem.create({food_item: levain, seller: juniper, wholeseller: juniper, unit_cost:6});
+juniper_milk = SellableFoodItem.create({food_item: milk, seller: juniper, wholeseller: tuckaway, unit_cost:5});
+juniper_eggs = SellableFoodItem.create({food_item: eggs, seller: juniper, wholeseller: tuckaway, unit_cost:5});
 
 
 durham1 = FamilyGroup.create({name:'Durham1'});
@@ -53,3 +54,9 @@ chris.save
 baker = Family.create({name: 'Baker Family', producer_entity: juniper, order_pickup_schedule: juniper_waldorf});
 ed = Consumer.new(first_name: 'Ed', last_name: 'Baker', balance: 0, email: 'edbaker@gmail.com', password: 'eatlocal', password_confirmation: 'eatlocal', family: baker)
 ed.save
+
+
+sonke = Producer.new(first_name: 'Sonke', last_name: 'Dornblut', email: 'sonke@gmail.com', password: 'eatlocal', password_confirmation: 'eatlocal', producer_entity: juniper)
+sonke.save
+sarah = Producer.new(first_name: 'Sarah', last_name: 'Cox', email: 'sarah@gmail.com', password: 'eatlocal', password_confirmation: 'eatlocal', producer_entity: tuckaway)
+sarah.save

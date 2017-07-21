@@ -29,6 +29,5 @@ class UsersController < ApplicationController
 
 		render json: {status: 'success'}
 
-
 	end
 end
