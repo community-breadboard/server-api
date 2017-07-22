@@ -1,5 +1,6 @@
 class OrderPickupSchedule < ApplicationRecord
 	belongs_to :producer_entity
+	has_many :orders
 	has_one :address, as: :addressable
 
 	def next_pickup_date
@@ -89,6 +90,34 @@ class OrderPickupSchedule < ApplicationRecord
 
 		_next_sale_start_datetime		
 	end
+
+
+	def next_sale_end_datetime
+		
+		d = Date.current
+		_next_sale_end_datetime = Time.current;
+		if (d.wday < sale_end_day_of_week) then
+			
+			_next_sale_end_datetime = DateTime.now.next_day(sale_end_day_of_week - d.wday).change({ hour: sale_end_hour, min: sale_end_minute, sec: 0 })
+			
+		elsif (d.wday > sale_end_day_of_week) then
+
+			_next_sale_end_datetime = DateTime.now.next_day(7 + sale_end_day_of_week - d.wday).change({ hour: sale_end_hour, min: sale_end_minute, sec: 0 })
+
+		# Same day
+		else
+
+			if (DateTime.current.seconds_since_midnight >= ((sale_end_hour * 60 * 60) + (sale_end_minute * 60))) then
+				_next_sale_end_datetime = DateTime.now.next_day(7).change({ hour: sale_end_hour, min: sale_end_minute, sec: 0 });
+			else
+				_next_sale_end_datetime = DateTime.now.change({ hour: sale_end_hour, min: sale_end_minute, sec: 0 });				
+			end
+			
+		end
+
+		_next_sale_end_datetime		
+	end
+
 
 	#TODO move this to angular
 	def formatted_pickup_time

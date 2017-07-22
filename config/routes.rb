@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 	post 'user_token' => 'user_token#create'
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 	
-	
 	get '/current_user', to: 'users#show'  
 	get '/current_user/food_items_for_sale', to: 'food_items#index'
 	get '/current_user/service_days', to: 'service_days#index'
@@ -11,4 +10,5 @@ Rails.application.routes.draw do
 	post '/current_user/add_credit', to: 'users#add_credit'
 	
 	get '/current_producer', to: 'producers#show'
+	get '/current_producer/order_pickup_schedules/:id/orders', to: 'orders#index'
 end
