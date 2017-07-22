@@ -10,5 +10,4 @@ Rails.application.routes.draw do
 	post '/current_user/add_credit', to: 'users#add_credit'
 	
 	get '/current_producer', to: 'producers#show'
-	get '/current_producer/order_pickup_schedules/:id/orders', to: 'orders#index'
 end
