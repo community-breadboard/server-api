@@ -54,7 +54,7 @@ class OrderPickupSchedule < ApplicationRecord
 			end
 				
 		elsif (sale_start_day_of_week > sale_end_day_of_week) then
-			if (d.wday > sale_start_day_of_week && d.wday < sale_end_day_of_week ) then
+			if (d.wday > sale_end_day_of_week && d.wday < sale_start_day_of_week ) then
 				_is_in_sale_period = false;
 			else
 				_is_in_sale_period = true;
