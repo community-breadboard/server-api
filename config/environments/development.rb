@@ -46,5 +46,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   
   
-  config.x.fake_current_datetime = DateTime.new(2017,7,27,12,0,0);
+#  config.x.fake_current_datetime = DateTime.new(2017,7,27,12,0,0);
 end
