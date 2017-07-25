@@ -5,6 +5,7 @@ class CreateSellableFoodItems < ActiveRecord::Migration[5.1]
 			t.references :wholeseller, index: true, foreign_key: { to_table: :producer_entities }
 			t.references :food_item, index: true
 			t.float :unit_cost
+			t.float :wholeseller_unit_cost
 			
 			t.timestamps
 		end

@@ -3,8 +3,13 @@ class OrderPickupSchedule < ApplicationRecord
 	has_many :orders
 	has_one :address, as: :addressable
 
+	def current_datetime
+		Rails.configuration.x.fake_current_datetime.blank? ? DateTime.current() : Rails.configuration.x.fake_current_datetime
+	end
+	
 	def next_pickup_date
-		d = Date.current
+
+		d = current_datetime
 		_next_pickup_date = d;
 		if (d.wday < pickup_day_of_week) then
 			_next_pickup_date = d + (pickup_day_of_week - d.wday)
@@ -12,7 +17,7 @@ class OrderPickupSchedule < ApplicationRecord
 			_next_pickup_date = d + (7 + pickup_day_of_week - d.wday)
 		else
 			# Same day
-			if (DateTime.current.seconds_since_midnight > ((pickup_end_hour * 60 * 60) + (pickup_end_minute * 60))) then
+			if (d.seconds_since_midnight > ((pickup_end_hour * 60 * 60) + (pickup_end_minute * 60))) then
 				_next_pickup_date = d + 7;
 			end
 		end
@@ -21,26 +26,27 @@ class OrderPickupSchedule < ApplicationRecord
 	
 	def is_in_sale_period
 		_is_in_sale_period = false
-		d = Date.current
+		
+		d = current_datetime
 		sale_start_seconds_since_midnight = ((sale_start_hour * 60 * 60) + (sale_start_minute * 60))
 		sale_end_seconds_since_midnight = ((sale_end_hour * 60 * 60) + (sale_end_minute * 60))
 		
 		if (d.wday == sale_start_day_of_week && d.wday == sale_end_day_of_week) then
-			if (DateTime.current.seconds_since_midnight >= sale_start_seconds_since_midnight && DateTime.current.seconds_since_midnight <= sale_end_seconds_since_midnight) then
+			if (d.seconds_since_midnight >= sale_start_seconds_since_midnight && d.seconds_since_midnight <= sale_end_seconds_since_midnight) then
 				_is_in_sale_period = true;
 			else
 				_is_in_sale_period = false;
 			end
 		
 		elsif (d.wday == sale_start_day_of_week) then
-			if (DateTime.current.seconds_since_midnight >= sale_start_seconds_since_midnight) then
+			if (d.seconds_since_midnight >= sale_start_seconds_since_midnight) then
 				_is_in_sale_period = true;
 			else
 				_is_in_sale_period = false;
 			end
 
 		elsif (d.wday == sale_end_day_of_week) then
-			if (DateTime.current.seconds_since_midnight <= sale_end_seconds_since_midnight) then
+			if (d.seconds_since_midnight <= sale_end_seconds_since_midnight) then
 				_is_in_sale_period = true;
 			else
 				_is_in_sale_period = false;
@@ -66,24 +72,23 @@ class OrderPickupSchedule < ApplicationRecord
 	
 	
 	def next_sale_start_datetime
-		
-		d = Date.current
-		_next_sale_start_datetime = Time.current;
+		d = current_datetime
+		_next_sale_start_datetime = d;
 		if (d.wday < sale_start_day_of_week) then
 			
-			_next_sale_start_datetime = DateTime.now.next_day(sale_start_day_of_week - d.wday).change({ hour: sale_start_hour, min: sale_start_minute, sec: 0 })
+			_next_sale_start_datetime = d.next_day(sale_start_day_of_week - d.wday).change({ hour: sale_start_hour, min: sale_start_minute, sec: 0 })
 			
 		elsif (d.wday > sale_start_day_of_week) then
 
-			_next_sale_start_datetime = DateTime.now.next_day(7 + sale_start_day_of_week - d.wday).change({ hour: sale_start_hour, min: sale_start_minute, sec: 0 })
+			_next_sale_start_datetime = d.next_day(7 + sale_start_day_of_week - d.wday).change({ hour: sale_start_hour, min: sale_start_minute, sec: 0 })
 
 		# Same day
 		else
 
-			if (DateTime.current.seconds_since_midnight >= ((sale_start_hour * 60 * 60) + (sale_start_minute * 60))) then
-				_next_sale_start_datetime = DateTime.now.change({ hour: sale_start_hour, min: sale_start_minute, sec: 0 });
+			if (d.seconds_since_midnight >= ((sale_start_hour * 60 * 60) + (sale_start_minute * 60))) then
+				_next_sale_start_datetime = d.change({ hour: sale_start_hour, min: sale_start_minute, sec: 0 });
 			else
-				_next_sale_start_datetime = DateTime.now.next_day(7).change({ hour: sale_start_hour, min: sale_start_minute, sec: 0 });				
+				_next_sale_start_datetime = d.next_day(7).change({ hour: sale_start_hour, min: sale_start_minute, sec: 0 });				
 			end
 			
 		end
@@ -94,23 +99,23 @@ class OrderPickupSchedule < ApplicationRecord
 
 	def next_sale_end_datetime
 		
-		d = Date.current
-		_next_sale_end_datetime = Time.current;
+		d = current_datetime
+		_next_sale_end_datetime = d;
 		if (d.wday < sale_end_day_of_week) then
 			
-			_next_sale_end_datetime = DateTime.now.next_day(sale_end_day_of_week - d.wday).change({ hour: sale_end_hour, min: sale_end_minute, sec: 0 })
+			_next_sale_end_datetime = d.next_day(sale_end_day_of_week - d.wday).change({ hour: sale_end_hour, min: sale_end_minute, sec: 0 })
 			
 		elsif (d.wday > sale_end_day_of_week) then
 
-			_next_sale_end_datetime = DateTime.now.next_day(7 + sale_end_day_of_week - d.wday).change({ hour: sale_end_hour, min: sale_end_minute, sec: 0 })
+			_next_sale_end_datetime = d.next_day(7 + sale_end_day_of_week - d.wday).change({ hour: sale_end_hour, min: sale_end_minute, sec: 0 })
 
 		# Same day
 		else
 
-			if (DateTime.current.seconds_since_midnight >= ((sale_end_hour * 60 * 60) + (sale_end_minute * 60))) then
-				_next_sale_end_datetime = DateTime.now.next_day(7).change({ hour: sale_end_hour, min: sale_end_minute, sec: 0 });
+			if (d.seconds_since_midnight >= ((sale_end_hour * 60 * 60) + (sale_end_minute * 60))) then
+				_next_sale_end_datetime = d.next_day(7).change({ hour: sale_end_hour, min: sale_end_minute, sec: 0 });
 			else
-				_next_sale_end_datetime = DateTime.now.change({ hour: sale_end_hour, min: sale_end_minute, sec: 0 });				
+				_next_sale_end_datetime = d.change({ hour: sale_end_hour, min: sale_end_minute, sec: 0 });				
 			end
 			
 		end

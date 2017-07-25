@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20170518000070) do
     t.integer "wholeseller_id"
     t.integer "food_item_id"
     t.float "unit_cost"
+    t.float "wholeseller_unit_cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["food_item_id"], name: "index_sellable_food_items_on_food_item_id"

@@ -40,6 +40,8 @@ json.producer_entity do
 				json.last_name order.user.last_name
 			end
 			json.food_items order.order_sellable_food_items do |item|
+				json.id item.sellable_food_item.food_item.id
+				json.sellable_food_item_id item.sellable_food_item.id
 				json.name item.sellable_food_item.food_item.name
 				json.quantity_ordered item.quantity
 				json.unit_cost item.unit_cost
@@ -48,6 +50,10 @@ json.producer_entity do
 				json.wholeseller do
 					json.id item.sellable_food_item.wholeseller.id
 					json.name item.sellable_food_item.wholeseller.name
+				end
+				json.producer_entity do
+					json.id item.sellable_food_item.food_item.producer_entity.id
+					json.name item.sellable_food_item.food_item.producer_entity.name
 				end
 				
 			end
@@ -92,6 +98,8 @@ json.producer_entity do
 				json.last_name order.user.last_name
 			end
 			json.food_items order.order_sellable_food_items do |item|
+				json.id item.sellable_food_item.food_item.id
+				json.sellable_food_item_id item.sellable_food_item.id
 				json.name item.sellable_food_item.food_item.name
 				json.quantity_ordered item.quantity
 				json.unit_cost item.unit_cost
@@ -100,6 +108,10 @@ json.producer_entity do
 				json.wholeseller do
 					json.id item.sellable_food_item.wholeseller.id
 					json.name item.sellable_food_item.wholeseller.name
+				end
+				json.producer_entity do
+					json.id item.sellable_food_item.food_item.producer_entity.id
+					json.name item.sellable_food_item.food_item.producer_entity.name
 				end
 				
 			end
